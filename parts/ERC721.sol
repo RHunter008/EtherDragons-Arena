@@ -5,15 +5,15 @@ pragma solidity ^0.4.11;
 
 contract ERC721Basic 
 {
-    /// @dev Emitted when token approvee is set
+    /// @dev Issued when token approvee is set
     event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);
-    /// @dev Emitted when owner approve all own tokens to operator.
+    /// @dev Issued when owner approves all tokens under his title to operator.
     event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved);
-    /// @dev Emitted when user deposit some funds.
+    /// @dev Issued when a user deposit some funds.
     event Deposit(address indexed _sender, uint256 _value);
-    /// @dev Emitted when user deposit some funds.
+    /// @dev Issued when a user deposit some funds.
     event Withdraw(address indexed _sender, uint256 _value);
-    /// @dev Emitted when token transferred to new owner
+    /// @dev Issued when a token is transferred to a new owner
     event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);
 
     // Required methods
@@ -53,14 +53,14 @@ contract ERC721Metadata is ERC721Basic
 contract ERC721Receiver 
 {
   /**
-   * @dev Magic value to be returned upon successful reception of an NFT
+   * @dev Magic value to be returned upon successful reception of NFT
    *  Equals to `bytes4(keccak256("onERC721Received(address,uint256,bytes)"))`,
    *  which can be also obtained as `ERC721Receiver(0).onERC721Received.selector`
    */
     bytes4 constant ERC721_RECEIVED = 0xf0b9e5ba;
 
   /**
-   * @notice Handle the receipt of an NFT
+   * @notice Handle the receipt of NFT
    * @dev The ERC721 smart contract calls this function on the recipient
    *  after a `safetransfer`. This function MAY throw to revert and reject the
    *  transfer. This function MUST use 50,000 gas or less. Return of other
