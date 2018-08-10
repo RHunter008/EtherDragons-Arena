@@ -13,7 +13,7 @@ contract DragonBase is DragonAccessControl
     using StringUtils for string;
     using UintStringUtils for uint;    
 
-    /// @dev The Birth event is fired whenever a new dragon comes into existence. 
+    /// @dev A Birth event is fired whenever a new dragon comes into existence. 
     event Birth(address owner, uint256 petId, uint256 tokenId, uint256 parentA, uint256 parentB, string genes, string params);
 
     /// @dev Token name
@@ -52,7 +52,7 @@ contract DragonBase is DragonAccessControl
     mapping(uint256 => address) internal approvals_;
     /// @dev Operator approvals
     mapping(address => mapping(address => bool)) internal operatorApprovals_;
-    /// @dev Index of token in owner's token list
+    /// @dev Token Index in owner's token list
     mapping(uint256 => uint256) internal ownerIndex_;
     /// @dev Owner's tokens list
     mapping(address => uint256[]) internal ownTokens_;
@@ -62,7 +62,7 @@ contract DragonBase is DragonAccessControl
     // @dev Non Assigned address.
     address constant NA = address(0);
 
-    /// @dev Add token to new owner. Increase owner's balance.
+    /// @dev Add token to a new owner. Increase owner's balance.
     /// @param _to Token receiver.
     /// @param _tokenId New token id.
     function _addTo(address _to, uint256 _tokenId)
@@ -78,7 +78,7 @@ contract DragonBase is DragonAccessControl
         token.owner = _to;
     }
 
-    /// @dev Create new token and increase mintCount.
+    /// @dev Create a new token and increase mintCount.
     /// @param _genome New token's genome.
     /// @param _params Token params string. 
     /// @param _parentA Token A parent.
@@ -192,7 +192,7 @@ contract DragonBase is DragonAccessControl
         return symbol_;
     }
 
-    /// @dev Get token URI to receive offchain information by it's id.
+    /// @dev Get token URI to receive offchain information by its id.
     /// @param _tokenId Token id.
     /// @return URL string. For example "http://erc721.tld/tokens/1".
     function tokenURI(uint256 _tokenId)
