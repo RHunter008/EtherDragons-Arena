@@ -16,7 +16,7 @@ contract DragonAccessControl
     Mode internal mode_ = Mode.TEST;
 
     /// @dev OffChain Server accounts ('minions') addresses
-    /// is used for money withdrawal and token exports 
+    /// It's used for money withdrawal and export of tokens 
     mapping(address => bool) internal minions_;
     
     /// @dev Presale contract address. Can call `presale` method.
@@ -68,7 +68,7 @@ contract DragonAccessControl
         mode_ = Mode.OPERATE;
     }
 
-    /// @dev Set presale contract address. Became useless when presale is over.
+    /// @dev Set presale contract address. Becomes useless when presale is over.
     /// @param _presale Presale contract address.
     function setPresale(address _presale)
         external
