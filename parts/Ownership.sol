@@ -12,15 +12,15 @@ contract DragonOwnership is ERC721, DragonBase
     using UintStringUtils for uint;    
     using AddressUtils for address;
 
-    /// @dev Emitted when token transferred to new owner. Additional fields is petId, genes, params
+    /// @dev Issued when a token is transferred to a new owner. Additional fields are petId, genes, params
     /// it uses for client-side indication
     event TransferInfo(address indexed _from, address indexed _to, uint256 _tokenId, uint256 petId, string genes, string params);
 
-    /// @dev Specify if _addr is token owner or approvee. Also check if `_addr`
-    /// is operator for token owner.
-    /// @param _tokenId Token to check ownership of.
+    /// @dev Specify if _addr is a token owner or an approvee. Also check if `_addr`
+    /// is operator for a token owner.
+    /// @param _tokenId Check if token belongs to address.
     /// @param _addr Address to check if it's an owner or an aprovee of `_tokenId`.
-    /// @return True if token can be managed by provided `_addr`.
+    /// @return True if a token can be managed by provided `_addr`.
     function isOwnerOrApproved(uint256 _tokenId, address _addr)
         public view returns(bool)
     {
@@ -40,13 +40,13 @@ contract DragonOwnership is ERC721, DragonBase
     }
 
     /// @dev Limit execution to token owner or approvee only.
-    /// @param _tokenId Token to check ownership of.
+    /// @param _tokenId Check if token belongs to address.
     modifier ownerOrApprovedOnly(uint256 _tokenId) {
         require(isOwnerOrApproved(_tokenId, msg.sender), "tokenOwnerOrApproved_only");
         _;
     }
 
-    /// @dev Contract's own token only acceptable.
+    /// @dev The action is allowed only if the smart contract is token owner itself, not a player.
     /// @param _tokenId Contract's token id.
     modifier ownOnly(uint256 _tokenId) {
         require(tokens_[_tokenId].owner == address(this), "own_only");
