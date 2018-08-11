@@ -6,8 +6,8 @@ import "./utils/string-utils.sol";
 import "./utils/common-wallet.sol";
 import "./parts/Ownership.sol";
 
-/// @title Managing contract. implements the logic of buying tokens, depositing / withdrawing funds 
-/// to the project account and importing / exporting tokens
+/// @title Managing contract. Implements the logic of buying tokens, depositing / withdrawing of funds 
+/// to the project account and tokens importing / exporting
 contract EtherDragonsCore is DragonOwnership 
 {
     using SafeMath8 for uint8;
@@ -45,15 +45,15 @@ contract EtherDragonsCore is DragonOwnership
         revert();
     }
 
-    /// @dev amount on the account of the contract. This amount consists of deposits  from players and the system reserve for payment of transactions
-    /// the player at any time to withdraw the amount corresponding to his account in the game, minus the cost of the transaction 
+    /// @dev Funds amount on the conract account. This amount consists of deposits from players and the system reserve for payment of transactions
+    /// A player may withdraw at any time the amount corresponding to his account in the game, minus transaction costs. 
     function getBalance() 
         public view returns (uint256)
     {
         return address(this).balance;
     }    
 
-    /// @dev at the moment of creation of the contract we transfer the address of the bank
+    /// @dev At the moment of the contract creation we transfer the bank address
     /// presell contract address set later
     constructor(
         address _bank
@@ -88,17 +88,17 @@ contract EtherDragonsCore is DragonOwnership
         return bountyCount_;
     }    
     
-    /// @dev Check if new token could be minted. Return true if count of minted
+    /// @dev Check if a new token could be minted. Return true if the count of minted
     /// tokens less than could be minted through contract deploy.
     /// Also, tokens can not be created more often than once in mintDelay_ minutes
-    /// @return True if current count is less then maximum tokens available for now.
+    /// @return True if the current count is less then maximum tokens available for now.
     function canMint()
         public view returns(bool)
     {
         return (mintCount_ + presaleCount_ + bountyCount_) < maxSupply_;
     }
 
-    /// @dev Here we write the addresses of the wallets of the server from which it is accessed
+    /// @dev Here we write the wallets'addresses of the server from which it is accessed
     /// to contract methods.
     /// @param _to New minion address
     function minionAdd(address _to)
@@ -106,7 +106,7 @@ contract EtherDragonsCore is DragonOwnership
     {
         require(minions_[_to] == false, "already_minion");
         
-        // разрешаем этому адресу пользоваться токенами контакта
+        
         // allow the address to use contract tokens 
         _setApprovalForAll(address(this), _to, true);
         
@@ -125,7 +125,7 @@ contract EtherDragonsCore is DragonOwnership
         minions_[_to] = false;
     }
 
-    /// @dev Here the player can put funds to the account of the contract
+    /// @dev Here a player can put funds to the account of the contract
     /// and get the same amount of in-game currency
     /// the game server understands who puts money at the wallet address
     function depositTo()
@@ -134,7 +134,7 @@ contract EtherDragonsCore is DragonOwnership
         emit Deposit(msg.sender, msg.value);
     }    
     
-    /// @dev Transfer amount of Ethers to specified receiver. Only owner can
+    /// @dev Transfer amount of ETHs to specified receiver. Only the owner can
     // call this method.
     /// @param _to Transfer receiver.
     /// @param _amount Transfer value.
@@ -145,9 +145,9 @@ contract EtherDragonsCore is DragonOwnership
         require((_amount + _transferCost) <= address(this).balance, "not enough money!");
         _to.transfer(_amount);
 
-        // send to the wallet of the server the transfer cost
-        // withdraw  it from the balance of the contract. this amount must be withdrawn from the player
-        // on the side of the game server
+        // send the transfer cost to the wallet of the server 
+        // withdraw  it from the balance of the contract. This amount must be withdrawn from the player
+        // on the game server side
         if (_transferCost > 0) {
             msg.sender.transfer(_transferCost);
         }
@@ -155,7 +155,7 @@ contract EtherDragonsCore is DragonOwnership
         emit Withdraw(_to, _amount);
     }        
 
-   /// @dev Mint new token with specified params. Transfer `_fee` to the
+   /// @dev Mint a new token with specified params. Transfer `_fee` to the
     /// `bank`. 
     /// @param _to New token owner.
     /// @param _fee Transaction fee.
@@ -164,7 +164,7 @@ contract EtherDragonsCore is DragonOwnership
     /// @param _parentA Parent A.
     /// @param _parentB Parent B.
     /// @param _petId Pet identifier.
-    /// @param _params List of parameters for pet.
+    /// @param _params List of pet's parameters.
     /// @param _transferCost Transfer cost.
     /// @return New token id.
     function mintRelease(
@@ -210,9 +210,9 @@ contract EtherDragonsCore is DragonOwnership
 
         emit Transfer(NA, _to, tokenId);
 
-        // send to the server wallet server the transfer cost,
-        // withdraw it from the balance of the contract. this amount must be withdrawn from the player
-        // on the side of the game server
+        // send the transfer cost to the server's wallet,
+        // withdraw it from the balance of the contract. This amount must be withdrawn from the player
+        // on the game server side
         if (_transferCost > 0) {
             msg.sender.transfer(_transferCost);
         }
@@ -220,18 +220,18 @@ contract EtherDragonsCore is DragonOwnership
         return tokenId;
     }
 
-    /// @dev Create new token via presale state
+    /// @dev Create a new token via presale stage
     /// @param _to New token owner.
     /// @param _genome New genome unique value.
     /// @return New token id.
-    /// at the pre-sale stage we sell the zero-generation pets, which have only a genome.
-    /// other attributes of such a token get when importing to the server
+    /// at the pre-sale stage we sell zero-generation pets, which have only one genome.
+    /// other attributes are get when it's importing to the server
     function mintPresell(address _to, string _genome)
         external presaleOnly presaleModeOnly returns(uint256)
     {
         require(presaleCount_ < PRESALE_LIMIT, "presale_limit");
 
-        // у пресейл пета нет параметров. Их он получит после ввода в игру.
+        // Presale pet has no parameters. The pet receives them when enters the game.
         uint256 tokenId = _createToken(_to, 0, _genome, 0, 0, 0, "");
         presaleCount_ += 1;
 
@@ -242,7 +242,7 @@ contract EtherDragonsCore is DragonOwnership
         return tokenId;
     }    
     
-    /// @dev Create new token for bounty activity
+    /// @dev Create a new token for bounty activity
     /// @param _to New token owner.
     /// @return New token id.
     function mintBounty(address _to, string _genome)
