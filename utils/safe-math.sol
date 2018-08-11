@@ -14,7 +14,7 @@ library SafeMath256 {
     return c;
   }
 
-  // @dev Integer division of two numbers, truncating the quotient.
+  // @dev Integer division of two numbers, truncating the ratio.
   function div(uint256 a, uint256 b) internal pure returns (uint256) {
     // assert(b > 0); // Solidity automatically throws when dividing by 0
     // uint256 c = a / b;
@@ -50,7 +50,7 @@ library SafeMath32 {
   }
 
 
-  // @dev Integer division of two numbers, truncating the quotient.
+  // @dev Integer division of two numbers, truncating the ratio.
   function div(uint32 a, uint32 b) internal pure returns (uint32) {
     // assert(b > 0); // Solidity automatically throws when dividing by 0
     // uint32 c = a / b;
@@ -86,7 +86,7 @@ library SafeMath8 {
   }
 
 
-  // @dev Integer division of two numbers, truncating the quotient.
+  // @dev Integer division of two numbers, truncating the ratio.
   function div(uint8 a, uint8 b) internal pure returns (uint8) {
     // assert(b > 0); // Solidity automatically throws when dividing by 0
     // uint8 c = a / b;
