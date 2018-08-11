@@ -217,11 +217,11 @@ contract Presale
     }
     
     // Genome Logic -----------------------------------------------------------------
-    /// Dragons are generated within the prelase, which are the ancestors of the destiny
-    /// newborns have a high chance of mutation and are unlikely to be purebred
-    /// the player will have to collect the breed, crossing a lot of pets
-    /// In addition, you will need to pick up combat abilities
-    /// these characteristics are assigned to the pet when the dragon is imported to the game server.    
+    /// Dragons are created at the presale stage as the ancestors of all next dragon generations.
+    /// These generations inherit the signs of their parents and may mutate in the future.
+    /// Players combine dragons to bring out a breed with necessary features.
+    /// They need to properly interbreed dragons in order to obtain the required set of combat skills.
+    /// Dragons will receive these skills after they are transferred to the game server.   
     function nextGenome()
         internal returns(string)
     {
