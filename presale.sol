@@ -9,7 +9,7 @@ contract Presale
     using AddressUtils for address;
 
     // Events ------------------------------------------------------------------
-    ///the event is fired when starting a new wave presale stage
+    ///the event is fired when a new wave of presale stage starts
     event StageBegin(uint8 stage, uint256 timestamp);
 
     ///the event is fired when token sold
@@ -217,7 +217,7 @@ contract Presale
     }
     
     // Genome Logic -----------------------------------------------------------------
-    /// within the prelase , the dragons are generated, which are the ancestors of the destiny
+    /// Dragons are generated within the prelase, which are the ancestors of the destiny
     /// newborns have a high chance of mutation and are unlikely to be purebred
     /// the player will have to collect the breed, crossing a lot of pets
     /// In addition, you will need to pick up combat abilities
