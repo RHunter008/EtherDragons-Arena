@@ -45,7 +45,7 @@ contract EtherDragonsCore is DragonOwnership
         revert();
     }
 
-    /// @dev Funds amount on the conract account. This amount consists of deposits from players and the system reserve for payment of transactions
+    /// @dev Funds amount on the contract account. This amount consists of deposits from players and the system reserve for payment of transactions
     /// A player may withdraw at any time the amount corresponding to his account in the game, minus transaction costs. 
     function getBalance() 
         public view returns (uint256)
@@ -90,7 +90,6 @@ contract EtherDragonsCore is DragonOwnership
     
     /// @dev Check if a new token could be minted. Return true if the count of minted
     /// tokens less than could be minted through contract deploy.
-    /// Also, tokens can not be created more often than once in mintDelay_ minutes
     /// @return True if the current count is less then maximum tokens available for now.
     function canMint()
         public view returns(bool)
