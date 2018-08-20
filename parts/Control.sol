@@ -118,4 +118,10 @@ contract DragonAccessControl
     {
         return minions_[_addr];
     }   
+
+    function getCurrentMode() 
+        public view returns (Mode) 
+    {
+        return mode_;
+    }    
 }
